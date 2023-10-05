@@ -1,9 +1,11 @@
 #!/usr/bin/python3
+"""fabrix script model"""
 from fabric.api import local
 from datetime import datetime
 
 
 def do_pack():
+    """function that manipulates files on server"""
     now = datetime.now()
     timestamp = now.strftime("%Y%m%d%H%M%S")
     archive_name = "web_static_{}.tgz".format(timestamp)
