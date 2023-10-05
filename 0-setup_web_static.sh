@@ -27,7 +27,3 @@ sudo sed -i "s@/var/www/html@/data/web_static/current@g" /etc/nginx/sites-availa
 # Restart Nginx to apply the changes
 sudo service nginx restart
 sudo ig ln -s /etc/nginx/sites-available/default default; 
-
-# nginix status
-nginix -v
-sudo service nginx status
