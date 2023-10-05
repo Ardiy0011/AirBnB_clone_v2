@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-"""fabrix script model"""
+"""fabric script model"""
 from fabric.api import local
 from datetime import datetime
 
@@ -12,7 +12,7 @@ def do_pack():
 
     local("mkdir -p versions")
 
-    # Change directory to 'versions'
+    """Change directory to versions"""
     with lcd("versions"):
         local("tar -czvf {} ../web_static".format(archive_name))
 
