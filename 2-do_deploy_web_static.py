@@ -7,6 +7,7 @@ env.hosts = ['<IP web-01>', '<IP web-02>']
 
 
 def do_deploy(archive_path):
+    """function to deploy archive"""
     if not exists(archive_path):
         return False
 
