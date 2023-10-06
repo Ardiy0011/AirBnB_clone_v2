@@ -1,4 +1,5 @@
 #!/usr/bin/python3
+"""model to deploy archive"""
 from fabric.api import env, put, run
 from os.path import exists
 
