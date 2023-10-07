@@ -1,40 +1,26 @@
 #!/usr/bin/python3
 """model to deploy archive"""
-from fabric.api import env, put, run
+from fabric.api import put, run, env
 from os.path import exists
-
-env.hosts = ['<IP web-01>', '<IP web-02>']
+env.hosts = ['142.44.167.228', '144.217.246.195']
 
 
 def do_deploy(archive_path):
-    """function to deploy archive"""
-    if not exists(archive_path):
+    """distributes an archive to the web servers"""
+    if exists(archive_path) is False:
         return False
-
     try:
-        """Upload the archive to /tmp/ directory on the web server"""
+        file_n = archive_path.split("/")[-1]
+        no_ext = file_n.split(".")[0]
+        path = "/data/web_static/releases/"
         put(archive_path, '/tmp/')
-
-        """Extract the archive to /data/web_static/releases"""
-        archive_filename = archive_path.split('/')[-1]
-        release_folder = "/data/web_static/releases/{}".format(
-            archive_filename.split('.')[0]
-        )
-        run("mkdir -p {}".format(release_folder))
-        run("tar -xzf /tmp/{} -C {}".format(archive_filename, release_folder))
-
-        """Remove the uploaded archive from the web server"""
-        run("rm /tmp/{}".format(archive_filename))
-
-        """Delete the current symbolic link"""
-        current_link = "/data/web_static/current"
-        if exists(current_link):
-            run("rm {}".format(current_link))
-
-        """Create a new symbolic link"""
-        run("ln -s {} {}".format(release_folder, current_link))
-
+        run('mkdir -p {}{}/'.format(path, no_ext))
+        run('tar -xzf /tmp/{} -C {}{}/'.format(file_n, path, no_ext))
+        run('rm /tmp/{}'.format(file_n))
+        run('mv {0}{1}/web_static/* {0}{1}/'.format(path, no_ext))
+        run('rm -rf {}{}/web_static'.format(path, no_ext))
+        run('rm -rf /data/web_static/current')
+        run('ln -s {}{}/ /data/web_static/current'.format(path, no_ext))
         return True
-
-    except Exception as e:
+    except:
         return False
