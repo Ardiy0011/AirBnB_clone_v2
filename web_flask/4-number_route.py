@@ -54,12 +54,10 @@ def number_route(n):
     if isinstance(n, int):
         return f'{n} is a number'
     else:
-        return 404
+        return 'Not Found', 404
 
 
 """run the Flask app """
-
-
 if __name__ == '__main__':
 
     app.run(debug=True, host='0.0.0.0', port=5000)
