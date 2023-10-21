@@ -51,7 +51,7 @@ strict_slashes=False. only if n is a number"""
 
 @app.route('/number/<n>', strict_slashes=False)
 def number_route(n):
-    if isinstance(n, int):
+    if n.isdigit():
         return f'{n} is a number'
     else:
         return 'Not Found', 404
@@ -64,7 +64,7 @@ template"""
 
 @app.route('/number_template/<n>', strict_slashes=False)
 def number_template(n):
-    if isinstance(n, int):
+    if n.isdigit():
         return render_template('5-number.html', n=n)
     else:
         return 'Not Found', 404
