@@ -20,7 +20,7 @@ with strict_slashes=False"""
 
 @app.route('/hbnb', strict_slashes=False)
 def hbnb():
-    return 'HBNB!'
+    return 'HBNB'
 
 
 """run the Flask app """
