@@ -64,7 +64,7 @@ template"""
 
 @app.route('/number_template/<n>', strict_slashes=False)
 def number_template(n):
-    if isinstance(n, int):
+    if n.isdigit():
         return render_template('5-number.html', n=n)
     else:
         return 'Not Found', 404
