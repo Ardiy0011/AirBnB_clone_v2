@@ -38,11 +38,11 @@ strict_slashes=False. if no text is passed default
 text of is cool is returned"""
 
 
-@app.route('/python/', strict_slashes=False)
+@app.route('/python/', defaults={'text': 'is cool'},
+           strict_slashes=False)
 @app.route('/python/<text>', strict_slashes=False)
-def python_text(text='is cool'):
-    text = text.replace('_', ' ')
-    return f'Python {text}'
+def python_text(text):
+    return f"Python {text.replace('_', ' ')}"
 
 
 """Define the route for "/number/<n>" with
