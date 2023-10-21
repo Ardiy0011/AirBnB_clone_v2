@@ -38,11 +38,11 @@ strict_slashes=False. if no text is passed default
 text of is cool is returned"""
 
 
-@app.route('/python/', defaults={'text': 'is cool'},
-           strict_slashes=False)
+@app.route('/python/', strict_slashes=False)
 @app.route('/python/<text>', strict_slashes=False)
-def python_text(text):
-    return f"Python {text.replace('_', ' ')}"
+def python_text(text='is cool'):
+    text = text.replace('_', ' ')
+    return f'Python {text}'
 
 
 """Define the route for "/number/<n>" with
@@ -54,7 +54,7 @@ def number_route(n):
     if isinstance(n, int):
         return f'{n} is a number'
     else:
-        return 'Not Found', 404
+        return 404
 
 
 """run the Flask app """
