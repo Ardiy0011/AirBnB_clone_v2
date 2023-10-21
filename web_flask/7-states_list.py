@@ -16,10 +16,16 @@ def get_data():
     return jsonify(data)
 
 
+"""run the Flask app """
+
+
 @app.teardown_appcontext
 def close_session(exception):
     """Closes SQLAlchemy session after each request."""
     storage.close()
+
+
+"""run the Flask app """
 
 
 @app.route('/states_list', strict_slashes=False)
@@ -32,5 +38,7 @@ def states_list():
 
 
 """run the Flask app """
+
+
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5000)

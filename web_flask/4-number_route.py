@@ -23,7 +23,7 @@ def hbnb():
     return 'HBNB'
 
 
-"""Define the route for "/c/<text>" with 
+"""Define the route for "/c/<text>" with
 strict_slashes=False"""
 
 
@@ -33,8 +33,8 @@ def c_text(text):
     return f'C {text}'
 
 
-"""Define the route for "/python/<text>" with 
-strict_slashes=False. if no text is passed default 
+"""Define the route for "/python/<text>" with
+strict_slashes=False. if no text is passed default
 text of is cool is returned"""
 
 
@@ -45,7 +45,7 @@ def python_text(text='is cool'):
     return f'Python {text}'
 
 
-"""Define the route for "/number/<n>" with 
+"""Define the route for "/number/<n>" with
 strict_slashes=False. only if n is a number"""
 
 
@@ -56,6 +56,10 @@ def number_route(n):
     else:
         return 'Not Found', 404
 
+
 """run the Flask app """
+
+
 if __name__ == '__main__':
+
     app.run(debug=True, host='0.0.0.0', port=5000)

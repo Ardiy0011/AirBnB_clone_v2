@@ -23,7 +23,7 @@ def hbnb():
     return 'HBNB'
 
 
-"""Define the route for "/c/<text>" with 
+"""Define the route for "/c/<text>" with
 strict_slashes=False"""
 
 

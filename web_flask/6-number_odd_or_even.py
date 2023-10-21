@@ -23,7 +23,7 @@ def hbnb():
     return 'HBNB'
 
 
-"""Define the route for "/c/<text>" with 
+"""Define the route for "/c/<text>" with
 strict_slashes=False"""
 
 
@@ -33,8 +33,8 @@ def c_text(text):
     return f'C {text}'
 
 
-"""Define the route for "/python/<text>" with 
-strict_slashes=False. if no text is passed default 
+"""Define the route for "/python/<text>" with
+strict_slashes=False. if no text is passed default
 text of is cool is returned"""
 
 
@@ -45,7 +45,7 @@ def python_text(text='is cool'):
     return f'Python {text}'
 
 
-"""Define the route for "/number/<n>" with 
+"""Define the route for "/number/<n>" with
 strict_slashes=False. only if n is a number"""
 
 
@@ -57,8 +57,8 @@ def number_route(n):
         return 'Not Found', 404
 
 
-"""Define the route for "/number_template/<n>" with 
-strict_slashes=False. only if n is a number render 
+"""Define the route for "/number_template/<n>" with
+strict_slashes=False. only if n is a number render
 template"""
 
 
@@ -70,9 +70,8 @@ def number_template(n):
         return 'Not Found', 404
 
 
-
-"""Define the route for "/number_template/<n>" with 
-strict_slashes=False. only if n is a number render 
+"""Define the route for "/number_template/<n>" with
+strict_slashes=False. only if n is a number render
 template.odd or even"""
 
 
@@ -80,10 +79,11 @@ template.odd or even"""
 def number_oddoreven(n):
     if isinstance(n, int):
         return render_template('6-number_odd_or_even',
-                               n=n, 
+                               n=n,
                                oe="even" if n % 2 == 0 else "odd")
     else:
         return 'Not Found', 404
+
 
 """run the Flask app """
 if __name__ == '__main__':
