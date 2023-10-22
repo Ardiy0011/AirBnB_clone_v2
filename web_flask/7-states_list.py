@@ -20,7 +20,7 @@ def close_session(exception):
 def states_list():
     """retrieve all states in order"""
     states = storage.all(State).values()
-    sorted_states = sorted(states, key=attrgetter('name'))
+    sorted_states = sorted(states, key=lambda state: state.name)
 
     return render_template('7-states_list.html',
                            sorted_states=sorted_states)
