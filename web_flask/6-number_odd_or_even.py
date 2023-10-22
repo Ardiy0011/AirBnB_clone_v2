@@ -75,15 +75,13 @@ strict_slashes=False. only if n is a number render
 template.odd or even"""
 
 
-@app.route('/number_odd_or_even/<n>', strict_slashes=False)
+@app.route('/number_odd_or_even/<int:n>', strict_slashes=False)
 def number_oddoreven(n):
     if n.isdigit():
-        return render_template('6-number_odd_or_even',
-                               n=n,
-                               oe="even" if n % 2 == 0 else "odd")
+        oe = "odd" if n % 2 != 0 else "even"
+        return render_template('6-number_odd_or_even.html', n=n, oe=oe)
     else:
         return 'Not Found', 404
-
 
 """run the Flask app """
 if __name__ == '__main__':
