@@ -1,34 +1,32 @@
 #!/usr/bin/python3
-"""Create a Flask application"""
-from flask import Flask, render_template
+"""Starts a Flask web application.
+
+The application listens on 0.0.0.0, port 5000.
+Routes:
+    /cities_by_states: HTML page with a list of all states and related cities.
+"""
 from models import storage
-from models.state import State
+from flask import Flask
+from flask import render_template
 
-
-app = Flask(__name__)
-
-
-"""run the Flask app """
-
-
-@app.teardown_appcontext
-def close_session(exception):
-    """Closes SQLAlchemy session after each request."""
-    storage.close()
-
-
-"""run the Flask app """
+app = Flask(name)
 
 
 @app.route("/cities_by_states", strict_slashes=False)
-def cities_in_states():
-    """A route to /states_list"""
-    data = sorted(storage.all(State).values(), key=lambda state: state.name)
-    return render_template("8-cities_by_states.html", states=data)
+def cities_by_states():
+    """Displays an HTML page with a list of all states and related cities.
+
+    States/cities are sorted by name.
+    """
+    states = storage.all("State")
+    return render_template("8-cities_by_states.html", states=states)
 
 
-"""run the Flask app """
+@app.teardown_appcontext
+def teardown(exc):
+    """Remove the current SQLAlchemy session8."""
+    storage.close()
 
 
-if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=5000)
+if name == "main":
+    app.run(host="0.0.0.0")
