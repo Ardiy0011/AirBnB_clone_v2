@@ -3,27 +3,32 @@
 from flask import Flask, render_template
 from models import storage
 from models.state import State
-from models.city import City
 
 
 app = Flask(__name__)
-app.url_map.strict_slashes = False
+
+
+"""run the Flask app """
 
 
 @app.teardown_appcontext
-def teardown_session(exception):
-    """ fixing the  erro around all"""
+def close_session(exception):
+    """Closes SQLAlchemy session after each request."""
     storage.close()
 
 
-@app.route('/cities_by_states')
-def cities_by_states():
-    """fixing the error areound all"""
-    states = storage.all(State)
-    sorted_states = sorted(states.values(), key=lambda state: state.name)
-    return render_template('cities_by_states.html', states=sorted_states)
+"""run the Flask app """
 
 
-"""pycode starting at rect"""
+@app.route("/cities_by_states", strict_slashes=False)
+def cities_in_states():
+    """A route to /states_list"""
+    data = sorted(storage.all(State).values(), key=lambda state: state.name)
+    return render_template("8-cities_by_states.html", states=data)
+
+
+"""run the Flask app """
+
+
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5000)

@@ -3,7 +3,6 @@
 from flask import Flask, render_template, jsonify
 from models import storage
 from models.state import State
-from operator import attrgetter
 
 
 app = Flask(__name__)
