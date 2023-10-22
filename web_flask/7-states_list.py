@@ -1,18 +1,15 @@
 #!/usr/bin/python3
-"""Create a Flask application"""
+""" A route to /states_list """
 from flask import Flask, render_template
 from models import storage
 from models.state import State
-from operator import attrgetter
-
 
 app = Flask(__name__)
 app.url_map.strict_slashes = False
 
 
 @app.teardown_appcontext
-def close_session(exception):
-    """Closes SQLAlchemy session after each request."""
+def close_db(exception):
     storage.close()
 
 
@@ -26,8 +23,5 @@ def states_list():
                            sorted_states=sorted_states)
 
 
-"""run the Flask app """
-
-
-if __name__ == '__main__':
-    app.run(host='0.0.0.0', port=5000)
+if __name__ == "__main__":
+    app.run(host="0.0.0.0", port=5000)
