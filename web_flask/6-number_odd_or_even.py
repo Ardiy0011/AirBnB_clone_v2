@@ -1,56 +1,90 @@
 #!/usr/bin/python3
-""" Routes to / """
+"""Create a Flask application"""
 from flask import Flask, render_template
 
-APP = Flask(__name__)
+
+app = Flask(__name__)
+
+"""Define the route for the root URL ("/")
+with strict_slashes=False"""
 
 
-@APP.route("/", strict_slashes=False)
-def hello():
-    """A route to /"""
-    return "Hello HBNB!"
+@app.route('/', strict_slashes=False)
+def hello_hbnb():
+    return 'Hello HBNB!'
 
 
-@APP.route("/hbnb", strict_slashes=False)
+"""Define the route for the root URL ("/hbnb")
+with strict_slashes=False"""
+
+
+@app.route('/hbnb', strict_slashes=False)
 def hbnb():
-    """A route to /hbnb"""
-    return "HBNB"
+    return 'HBNB'
 
 
-@APP.route("/c/<text>", strict_slashes=False)
-def c(text):
-    """Route to /c"""
-    if "_" in text:
-        text = text.replace("_", " ")
-    return "C {text}".format(text=text)
+"""Define the route for "/c/<text>" with
+strict_slashes=False"""
 
 
-@APP.route("/python/")
-@APP.route("/python/<text>", strict_slashes=False)
-def python(text="is cool"):
-    """Route to /python"""
-    if "_" in text:
-        text = text.replace("_", " ")
-    return "Python {text}".format(text=text)
+@app.route('/c/<text>', strict_slashes=False)
+def c_text(text):
+    text = text.replace('_', ' ')
+    return f'C {text}'
 
 
-@APP.route("/number/<int:n>", strict_slashes=False)
-def number(n):
-    """Display number if its int"""
-    return "{n} is a number".format(n=n)
+"""Define the route for "/python/<text>" with
+strict_slashes=False. if no text is passed default
+text of is cool is returned"""
 
 
-@APP.route("/number_template/<int:n>", strict_slashes=False)
+@app.route('/python/', strict_slashes=False)
+@app.route('/python/<text>', strict_slashes=False)
+def python_text(text='is cool'):
+    text = text.replace('_', ' ')
+    return f'Python {text}'
+
+
+"""Define the route for "/number/<n>" with
+strict_slashes=False. only if n is a number"""
+
+
+@app.route('/number/<n>', strict_slashes=False)
+def number_route(n):
+    if n.isdigit():
+        return f'{n} is a number'
+    else:
+        return 'Not Found', 404
+
+
+"""Define the route for "/number_template/<n>" with
+strict_slashes=False. only if n is a number render
+template"""
+
+
+@app.route('/number_template/<n>', strict_slashes=False)
 def number_template(n):
-    """Display number if its int"""
-    return render_template("5-number.html", num=n)
+    if n.isdigit():
+        return render_template('5-number.html', n=n)
+    else:
+        return 'Not Found', 404
 
 
-@APP.route("/number_odd_or_even/<int:n>", strict_slashes=False)
-def number_odd_or_even(n):
-    """Return number if n is odd or even"""
-    return render_template("6-number_odd_or_even.html", num=n)
+"""Define the route for "/number_template/<n>" with
+strict_slashes=False. only if n is a number render
+template.odd or even"""
 
 
-if __name__ == "__main__":
-    APP.run(host="0.0.0.0", port=5000)
+@app.route('/number_odd_or_even/<n>', strict_slashes=False)
+def number_oddoreven(n):
+    if n.isdigit():
+        return render_template('6-number_odd_or_even',
+                               n=n,
+                               oe="even" if n % 2 == 0 else "odd")
+    else:
+        return 'Not Found', 404
+
+
+"""run the Flask app """
+if __name__ == '__main__':
+    app.run(debug=True, host='0.0.0.0', port=5000)
