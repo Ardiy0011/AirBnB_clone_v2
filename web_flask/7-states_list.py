@@ -9,17 +9,17 @@ from operator import attrgetter
 app = Flask(__name__)
 
 
+@app.teardown_appcontext
+def close_session(exception):
+    """Closes SQLAlchemy session after each request."""
+    storage.close()
+
+
 @app.route('/api/data', methods=['GET'])
 def get_data():
     """retireve all objects from db"""
     data = storage.all()
     return jsonify(data)
-
-
-@app.teardown_appcontext
-def close_session(exception):
-    """Closes SQLAlchemy session after each request."""
-    storage.close()
 
 
 @app.route('/states_list', strict_slashes=False)
