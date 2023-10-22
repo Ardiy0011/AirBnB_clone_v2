@@ -7,13 +7,6 @@ from operator import attrgetter
 
 
 app = Flask(__name__)
-app.url_map.strict_slashes = False
-
-@app.route('/api/data', methods=['GET'])
-def get_data():
-    """retireve all objects from db"""
-    data = storage.all()
-    return jsonify(data)
 
 
 """run the Flask app """
@@ -28,7 +21,7 @@ def close_session(exception):
 """run the Flask app """
 
 
-@app.route("/states_list" , strict_slashes=False)
+@app.route("/states_list", strict_slashes=False)
 def states_list():
     """A route to /states_list"""
     data = sorted(storage.all(State).values(), key=lambda state: state.name)
