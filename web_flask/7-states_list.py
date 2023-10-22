@@ -7,7 +7,7 @@ from operator import attrgetter
 
 
 app = Flask(__name__)
-
+app.url_map.strict_slashes = False
 
 @app.route('/api/data', methods=['GET'])
 def get_data():
