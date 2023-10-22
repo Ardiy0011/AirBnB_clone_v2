@@ -77,9 +77,8 @@ template.odd or even"""
 
 @app.route('/number_odd_or_even/<int:n>', strict_slashes=False)
 def number_oddoreven(n):
-    return render_template('6-number_odd_or_even',
-                           n=n,
-                           oe="even" if n % 2 != 0 else "odd")
+    oe = "odd" if n % 2 != 0 else "even"
+    return render_template('6-number_odd_or_even.html', n=n, oe=oe)
 
 
 """run the Flask app """
