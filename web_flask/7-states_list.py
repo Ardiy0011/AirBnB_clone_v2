@@ -1,12 +1,13 @@
 #!/usr/bin/python3
 """Create a Flask application"""
-from flask import Flask, render_template, jsonify
+from flask import Flask, render_template
 from models import storage
 from models.state import State
 from operator import attrgetter
 
 
 app = Flask(__name__)
+app.url_map.strict_slashes = False
 
 
 @app.teardown_appcontext
@@ -15,7 +16,7 @@ def close_session(exception):
     storage.close()
 
 
-@app.route('/states_list', strict_slashes=False)
+@app.route('/states_list')
 def states_list():
     """retrieve all states in order"""
     states = storage.all(State).values()
