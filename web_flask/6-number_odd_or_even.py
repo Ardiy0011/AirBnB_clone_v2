@@ -79,7 +79,7 @@ template.odd or even"""
 def number_oddoreven(n):
     return render_template('6-number_odd_or_even',
                            n=n,
-                           oe="even" if n % 2 == 0 else "odd")
+                           oe="even" if n % 2 != 0 else "odd")
 
 
 """run the Flask app """
