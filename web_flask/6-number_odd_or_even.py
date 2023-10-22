@@ -80,8 +80,7 @@ def number_oddoreven(n):
     if n.isdigit():
         oe = "odd" if n % 2 != 0 else "even"
         return render_template('6-number_odd_or_even.html', n=n, oe=oe)
-    else:
-        return 'Not Found', 404
+
 
 """run the Flask app """
 if __name__ == '__main__':
