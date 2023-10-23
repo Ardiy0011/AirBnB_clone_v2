@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-""" Starts a flask web application """
+"""Create a Flask application"""
 from flask import Flask, render_template
 from models import storage
 from models.amenity import Amenity
@@ -23,5 +23,6 @@ def hbnb_filters():
                            amenities=list(amenities.values()))
 
 
+"""run the Flask app """
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5000)

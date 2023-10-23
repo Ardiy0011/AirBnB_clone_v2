@@ -1,0 +1,58 @@
+<!DOCTYPE HTML>
+<HTML LANG="en">
+
+<HEAD>
+	<TITLE>AirBnB clone</TITLE>
+
+	<LINK REL="SHORTCUT ICON" HREF="../static/images/icon.ico">
+    <LINK REL="STYLESHEET" HREF="../static/styles/3-footer.css" />
+    <LINK REL="STYLESHEET" HREF="../static/styles/6-filters.css" />
+	<LINK REL="STYLESHEET" HREF="../static/styles/4-common.css" />
+	<LINK REL="STYLESHEET" HREF="../static/styles/3-header.css" />
+</HEAD>
+
+<BODY>
+	<HEADER>
+		<DIV ID="HEADER_LOGO"></DIV>
+	</HEADER>
+	<DIV CLASS="CONTAINER">
+		<SECTION CLASS="FILTERS">
+			<BUTTON>Search</BUTTON>
+			<DIV CLASS="LOCATIONS">
+				<H3>States</H3>
+				<H4>&nbsp;</H4>
+				<UL CLASS="POPOVER">
+					{% FOR STATE IN STATES|SORT(ATTRIBUTE='NAME') %}
+					<LI>
+						<H2>{{STATE.NAME}}</H2>
+						<UL>
+							{% FOR CITY IN STATE.CITIES|SORT(ATTRIBUTE='NAME') %}
+							<LI>
+								<H4>{{CITY.NAME}}</H4>
+							</LI>
+							{% ENDFOR %}
+						</UL>
+					</LI>
+					{% ENDFOR %}
+				</UL>
+			</DIV>
+			<DIV CLASS="AMENITIES">
+				<H3>Amenities</H3>
+				<H4>&nbsp;</H4>
+				<UL CLASS="POPOVER">
+					{% FOR AMENITY IN AMENITIES|SORT(ATTRIBUTE='NAME') %}
+					<LI>
+						<H4>{{AMENITY.NAME}}</H4>
+					</LI>
+					{% ENDFOR %}
+				</UL>
+			</DIV>
+
+		</SECTION>
+	</DIV>
+	<FOOTER>
+		<P>Holberton School</P>
+	</FOOTER>
+</BODY>
+
+</HTML>

@@ -1,5 +1,5 @@
 #!/usr/bin/python3
-"""Starts a Flask web application"""
+"""Create a Flask application"""
 from models import storage
 from flask import Flask
 from flask import render_template
@@ -20,5 +20,6 @@ def cities_by_states():
     return render_template("8-cities_by_states.html", states=states)
 
 
+"""run the Flask app """
 if __name__ == '__main__':
     app.run(host='0.0.0.0', port=5000)
