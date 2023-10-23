@@ -1,25 +1,23 @@
 #!/usr/bin/python3
-""" Starts a Flask web app """
-from flask import Flask, render_template
+"""Starts a Flask web application"""
 from models import storage
-from models.state import State
+from flask import Flask
+from flask import render_template
 
 app = Flask(__name__)
-app.url_map.strict_slashes = False
 
 
 @app.teardown_appcontext
-def dispose(exception):
-    """ Remove current session """
+def teardown(exc):
+    """Remove the current SQLAlchemy session."""
     storage.close()
 
 
-@app.route('/cities_by_states')
-def states():
-    """ Display list of all the states """
-    states = storage.all(State)
-    states_list = list(states.values())
-    return render_template('8-cities_by_states.html', states=states_list)
+@app.route("/cities_by_states", strict_slashes=False)
+def cities_by_states():
+    """Displays related cities"""
+    states = storage.all("State")
+    return render_template("8-cities_by_states.html", states=states)
 
 
 if __name__ == '__main__':
